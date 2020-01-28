@@ -46,18 +46,19 @@
         app:layout_constraintTop_toBottomOf="@+id/classSize" />
 
     <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="406dp"
-        android:layout_height="482dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/allStudentsList"
+        android:layout_width="385dp"
+        android:layout_height="510dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/submit">
 
-        <ListView
-            android:id="@+id/allStudents"
+        <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
