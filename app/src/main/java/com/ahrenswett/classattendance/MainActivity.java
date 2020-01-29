@@ -26,6 +26,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     static int[] studentArr;
     static Boolean allPresent = false;
+    protected AppDatabase db;
+
 
 
 
@@ -39,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
         final ScrollView sv = findViewById(R.id.allStudentsList);
         final LinearLayout ll = findViewById(R.id.ll);
         final EditText classSize = findViewById(R.id.classSize);
-
+        final EditText className = findViewById(R.id.className);
 //        Set the button to pass the class size to the checkbox generator
         Button submit = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                db.classDao().addClass(new Class(className.getText().toString(), Integer.parseInt(classSize.getText().toString())));
 //              get size of checkbox list and inittialize an array  in concordance
                 int size = Integer.parseInt(classSize.getText().toString());
                 studentArr = new int[size];
