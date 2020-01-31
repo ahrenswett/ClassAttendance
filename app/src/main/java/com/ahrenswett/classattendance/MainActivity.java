@@ -1,92 +1,60 @@
 package com.ahrenswett.classattendance;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    static int[] studentArr;
-    static Boolean allPresent = false;
-    protected AppDatabase db;
-
-
-
+public class MainActivity extends AppCompatActivity implements ClassAdapter.ClassInteractionListener{
+    private static final String DATABASE_NAME = "classes_db";
+    protected static AppDatabase db;
+    protected List<Class> classes;
+    RecyclerView classRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        View view = MainActivity.this.getWindow().getDecorView();
+        renderClassestoRecyclerView();
 
-//        setup scrollview
-        final ScrollView sv = findViewById(R.id.allStudentsList);
-        final LinearLayout ll = findViewById(R.id.ll);
-        final EditText classSize = findViewById(R.id.classSize);
-        final EditText className = findViewById(R.id.className);
-//        Set the button to pass the class size to the checkbox generator
-        Button submit = findViewById(R.id.submit);
-        submit.setOnClickListener(new View.OnClickListener() {
+
+
+        //TODO: Set up floating action button onClick intent
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.classDao().addClass(new Class(className.getText().toString(), Integer.parseInt(classSize.getText().toString())));
-//              get size of checkbox list and inittialize an array  in concordance
-                int size = Integer.parseInt(classSize.getText().toString());
-                studentArr = new int[size];
-//        create a new checkbox for each student in the class
-                for (int i = 0; i < size; i++) {
-                    studentArr[i]=i;
-                }
-                for(final int student:studentArr){
-                    final CheckBox studentBox = new CheckBox(MainActivity.this);
-                    studentBox.setText("Student #"+ student);
-                    studentBox.setId(student);
-                    System.out.println(student);
-                    studentBox.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-//                            check if it was checked if it was check if all checked.
-                            if(studentBox.isChecked()){
-                                allPresent = checker(ll);
-                                Toast.makeText(getApplicationContext(),"status" + allPresent, Toast.LENGTH_SHORT).show();
-                            }else{
-                                allPresent=false;
-                                Toast.makeText(getApplicationContext(),"status" + allPresent, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    ll.addView(studentBox);
-                }
+                Intent goToAddClass = new Intent(MainActivity.this, AddClass.class);
+                MainActivity.this.startActivity(goToAddClass);
             }
         });
     }
-//    check if all  checked checked
-    public static boolean checker(LinearLayout ll){
-//        int children = ll.getChildCount();
-        for (int i=0; i<ll.getChildCount(); i++){
-            CheckBox cb = (CheckBox)ll.getChildAt(i);
-            if(!cb.isChecked()){
-               return false;
-            }
-        }
-        return true;
-    }
 
+    //TODO: Get list of classes from Room and render to the recycler view
+    private void renderClassestoRecyclerView() {
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
+        this.classes = new LinkedList<>();
+//        add all classes into the linked list
+        this.classes.addAll(db.classDao().getAll());
+        classRecycler = findViewById(R.id.classRecycler);
+        classRecycler.setLayoutManager(new LinearLayoutManager(this));
+        classRecycler.setAdapter(new ClassAdapter(classes, this));
+
+        }
+
+    @Override
+    public void classCommand(Class classSession) {
+
+    }
 }
