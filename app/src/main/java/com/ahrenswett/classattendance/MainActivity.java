@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
 
         classRecycler = findViewById(R.id.classRecycler);
         classRecycler.setLayoutManager(new LinearLayoutManager(this));
-        classRecycler.setAdapter(new ClassAdapter(classes, this));
+        classRecycler.setAdapter(new ClassAdapter(classes, MainActivity.this));
 
 
         }
