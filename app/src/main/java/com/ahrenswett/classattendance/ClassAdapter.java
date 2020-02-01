@@ -1,20 +1,14 @@
 package com.ahrenswett.classattendance;
 
-import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ahrenswett.classattendance.AddClass;
-import com.ahrenswett.classattendance.Class;
-import com.ahrenswett.classattendance.R;
 
 import java.util.List;
 
@@ -23,8 +17,8 @@ import java.util.List;
 
 class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
 //    global vars
-    public List<Class> classes;
-    ClassInteractionListener listener;
+    private List<Class> classes;
+    private ClassInteractionListener listener;
 
 
     public interface ClassInteractionListener{
@@ -32,7 +26,7 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
     }
 
 
-    public ClassAdapter(List<Class> classes, ClassInteractionListener listener){
+    ClassAdapter(List<Class> classes, ClassInteractionListener listener){
         this.classes = classes;
         this.listener = listener;
     }
@@ -61,12 +55,14 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
     @NonNull
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.i(MainActivity.TAG, "IN onCreateViewHolder");
         ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_class, parent,false);
         return new ClassViewHolder(v, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
+        Log.i(MainActivity.TAG, "IN onBindViewHolder");
         Class classAtPosition = this.classes.get(position);
         holder.ClassTitleView.setText(classAtPosition.getClassName());
         holder.ClassSizeView.setText(classAtPosition.getSize());

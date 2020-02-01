@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ClassAdapter.ClassInteractionListener{
+    protected static final String TAG = "ahren.Main";
     private static final String DATABASE_NAME = "classes_db";
     protected static AppDatabase db;
     protected List<Class> classes;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
 
 
 
-        //TODO: Set up floating action button onClick intent
+//        TODO: Set up floating action button onClick intent
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,16 +42,24 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
             }
         });
     }
+    protected void onResume(){
+        super.onResume();
+        renderClassestoRecyclerView();
+    }
 
-    //TODO: Get list of classes from Room and render to the recycler view
+//    TODO: Render the list that is being Generated to the View
+
     private void renderClassestoRecyclerView() {
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).allowMainThreadQueries().build();
         this.classes = new LinkedList<>();
 //        add all classes into the linked list
         this.classes.addAll(db.classDao().getAll());
+        Log.wtf(TAG,"SUCCESS classes is: "+classes.size());
+
         classRecycler = findViewById(R.id.classRecycler);
         classRecycler.setLayoutManager(new LinearLayoutManager(this));
         classRecycler.setAdapter(new ClassAdapter(classes, this));
+
 
         }
 

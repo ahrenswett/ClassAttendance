@@ -24,11 +24,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classRecycler"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="573dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.961">
 
     </androidx.recyclerview.widget.RecyclerView>
 
