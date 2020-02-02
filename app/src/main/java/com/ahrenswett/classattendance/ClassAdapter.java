@@ -64,13 +64,13 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
         Log.i(MainActivity.TAG, "IN onBindViewHolder");
         Class classAtPosition = this.classes.get(position);
+        holder.myClass = classAtPosition;
         holder.ClassTitleView.setText(classAtPosition.getClassName());
-        holder.ClassSizeView.setText(classAtPosition.getSize());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return this.classes.size();
     }
 
 
