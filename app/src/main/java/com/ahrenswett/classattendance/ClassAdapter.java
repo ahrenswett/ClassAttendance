@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -32,16 +33,15 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
     }
 
 //    Declare a ViewHolder that declares a listener and the text areas needed and the object
-    class ClassViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class ClassViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Class myClass;
-        TextView ClassTitleView;
-        TextView ClassSizeView;
+        TextView classTitleView;
         ClassInteractionListener listener;
 
     ClassViewHolder(@NonNull View itemView,ClassInteractionListener listener) {
         super(itemView);
-        this.ClassTitleView = itemView.findViewById(R.id.classNameText) ;
-        this.ClassSizeView = itemView.findViewById(R.id.classSizeText);
+        this.classTitleView = itemView.findViewById(R.id.classNameText) ;
+        this.classSizeView = itemView.findViewById(R.id.classSizeText);
         this.listener = listener;
     }
 
@@ -56,7 +56,8 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Log.i(MainActivity.TAG, "IN onCreateViewHolder");
-        ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_class, parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_class, parent,false);
+
         return new ClassViewHolder(v, listener);
     }
 
@@ -64,18 +65,14 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder>{
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
         Log.i(MainActivity.TAG, "IN onBindViewHolder");
         Class classAtPosition = this.classes.get(position);
-        holder.ClassTitleView.setText(classAtPosition.getClassName());
-        holder.ClassSizeView.setText(classAtPosition.getSize());
+        holder.
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return classes.size();
     }
-
-
-
-
 }
 
 
