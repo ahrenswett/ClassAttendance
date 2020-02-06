@@ -12,28 +12,21 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please enter your cass information." />
+        android:text="@string/Please_enter_a_new_class_name"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/className"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Class Name"
+        android:hint="@string/Class_Name"
         android:inputType="text" />
-
-    <EditText
-        android:id="@+id/classSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter Class Size"
-        android:inputType="number" />
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add" />
+        android:text="@string/Add" />
 
 </LinearLayout>

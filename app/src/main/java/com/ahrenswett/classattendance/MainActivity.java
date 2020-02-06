@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
 //                consider alert Dialog or dialog frag instead of Popup
                 linearLayout1[0] = new LinearLayout(view.getContext());
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    MainActivity.db.classDao().addClass(new Class(className.getText().toString()));
+                    db.classDao().addClass(new Class(className.getText().toString()));
                     checkForNewClass();
                     addClass.dismiss();
                     }
