@@ -39,17 +39,18 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
 
 
 
-//        TODO: Set up floating action button onClick intent
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                linearLayout1[0] = new LinearLayout(getApplicationContext());
-                LayoutInflater layoutInflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+//                consider alert Dialog or dialog frag instead of Popup
+                linearLayout1[0] = new LinearLayout(view.getContext());
+                LayoutInflater layoutInflater = LayoutInflater.from(view.getContext());
                 View customView = layoutInflater.inflate(R.layout.pop_up,null);
 
-                final Button submit = findViewById(R.id.submit);
-                final EditText className = findViewById(R.id.className);
+                final Button submit = customView.findViewById(R.id.submit);
+                final EditText className = customView.findViewById(R.id.className);
 
 
                 //instantiate popup window
@@ -61,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements ClassAdapter.Clas
 
                 //Add class to the database
 //                TODO: Figure out why null???????
-                Log.wtf(TAG, submit.toString());
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

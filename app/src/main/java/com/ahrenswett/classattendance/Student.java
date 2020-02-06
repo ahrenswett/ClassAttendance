@@ -12,7 +12,7 @@ public class Student {
     private String studentName;
     private String sex;
     private String age;
-    private List<Class> classesEnrolledIn;
+//    private List<Class> classesEnrolledIn;
 
     @PrimaryKey(autoGenerate = true)
     private long studentId;
@@ -41,13 +41,13 @@ public class Student {
         this.age = age;
     }
 
-    public List<Class> getClassesEnrolledIn() {
-        return classesEnrolledIn;
-    }
-
-    public void setClassesEnrolledIn(List<Class> classesEnrolledIn) {
-        this.classesEnrolledIn = classesEnrolledIn;
-    }
+//    public List<Class> getClassesEnrolledIn() {
+//        return classesEnrolledIn;
+//    }
+//
+//    public void setClassesEnrolledIn(List<Class> classesEnrolledIn) {
+//        this.classesEnrolledIn = classesEnrolledIn;
+//    }
 
     public long getStudentId() {
         return studentId;

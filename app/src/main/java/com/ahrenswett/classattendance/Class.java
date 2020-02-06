@@ -13,10 +13,10 @@ public class Class {
     @ColumnInfo(name = "class_name")
     private String className;
     private int size;
-    @TypeConverter
-    private List studentsInClass(long value){
-        return value == null ? null : new 
-    }
+//    @TypeConverter
+//    private List studentsInClass(long value){
+//        return value == null ? null : new
+//    }
 
     @PrimaryKey(autoGenerate = true)
     private long id;
@@ -26,7 +26,7 @@ public class Class {
         this.size = 0;
 
         //TODO: should I implement a list that that holds all
-        this.studentsInClass = new ArrayList();
+//        this.studentsInClass = new ArrayList();
 
 
     }
@@ -56,11 +56,11 @@ public class Class {
         this.id = id;
     }
 
-    public List getStudentsInClass() {
-        return studentsInClass;
-    }
-
-    public void setStudentsInClass(List<Class> studentsInClass) {
-        this.studentsInClass = studentsInClass;
-    }
+//    public List getStudentsInClass() {
+//        return studentsInClass;
+//    }
+//
+//    public void setStudentsInClass(List<Class> studentsInClass) {
+//        this.studentsInClass = studentsInClass;
+//    }
 }
