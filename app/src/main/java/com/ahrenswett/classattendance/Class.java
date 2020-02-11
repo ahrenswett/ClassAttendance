@@ -3,27 +3,35 @@ package com.ahrenswett.classattendance;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
-import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Class {
     @ColumnInfo(name = "class_name")
     private String className;
     private int size;
-
-
+//    @TypeConverter
+//    private List studentsInClass(long value){
+//        return value == null ? null : new
+//    }
 
     @PrimaryKey(autoGenerate = true)
     private long id;
 
-
-    Class(String className, int size) {
+    Class(String className) {
         this.className = className;
-        this.size = size;
+        this.size = 0;
+
+        //TODO: should I implement a list that that holds all
+//        this.studentsInClass = new ArrayList();
+
+
     }
 
-    public String getClassName() {
+    String getClassName() {
         return className;
     }
 
@@ -31,11 +39,11 @@ public class Class {
         this.className = className;
     }
 
-    public int getSize() {
+    int getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    void setSize(int size) {
         this.size = size;
     }
 
@@ -47,4 +55,12 @@ public class Class {
     public void setId(long id) {
         this.id = id;
     }
+
+//    public List getStudentsInClass() {
+//        return studentsInClass;
+//    }
+//
+//    public void setStudentsInClass(List<Class> studentsInClass) {
+//        this.studentsInClass = studentsInClass;
+//    }
 }

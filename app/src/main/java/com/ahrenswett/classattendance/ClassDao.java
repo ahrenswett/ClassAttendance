@@ -11,10 +11,13 @@ import java.util.List;
 @Dao
 public interface ClassDao {
     @Query("SELECT * FROM class")
-    List<Class> getAll();
+    List<Class> getAllClasses();
 
     @Query("SELECT * FROM class WHERE class_name =:className")
     List<Class> getClassByName(String className);
+
+    @Query("SELECT * FROM class WHERE id=:id")
+    Class getClassById(int id);
 
     @Insert
     void addClass(Class className);
